@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.quizmaster.databinding.ActivityDashboardStudentBinding
-import com.google.firebase.database.R
 
 class DashboardStudentActivity: AppCompatActivity() {
 
