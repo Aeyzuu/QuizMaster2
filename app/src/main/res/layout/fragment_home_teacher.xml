@@ -1,0 +1,82 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".HomeTeacherFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create New Quiz"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/quizTitleInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Quiz Title (e.g., 'World History - Chapter 3')"
+        android:inputType="textCapSentences"
+        android:layout_marginTop="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/fetchQuestionsButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Fetch 10 Trivia Questions"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/manualAddButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Add Custom Question"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Questions Preview:"
+        android:layout_marginTop="16dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/questionRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="#EFEFEF"
+        android:padding="4dp"
+        tools:listitem="@layout/item_question_preview"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/saveQuizButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create &amp; Publish Quiz"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Existing Quizzes:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="24dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/teacherQuizzesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        tools:listitem="@layout/item_quiz_management"/>
+
+</LinearLayout>

@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".HomeStudentFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Available Quizzes"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/availableQuizzesTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fetching Quizzes..."
+        android:gravity="center"
+        android:textSize="18sp"
+        android:paddingTop="32dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_gravity="center_horizontal"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/availableQuizzesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_available_quiz"/>
+
+</LinearLayout>

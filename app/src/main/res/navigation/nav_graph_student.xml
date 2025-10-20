@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/homeStudentFragment">
+
+    <fragment
+        android:id="@+id/homeStudentFragment"
+        android:name="com.quizmaster.HomeStudentFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home_student" />
+
+
+    <fragment
+        android:id="@+id/settingStudentFragment"
+        android:name="com.quizmaster.SettingStudentFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_setting_student" />
+
+
+</navigation>

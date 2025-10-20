@@ -1,0 +1,106 @@
+{
+  "project_info": {
+    "project_number": "1083945982757",
+    "firebase_url": "https://login-ebbdc-default-rtdb.firebaseio.com",
+    "project_id": "login-ebbdc",
+    "storage_bucket": "login-ebbdc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083945982757:android:627b200ce40ad10d7458cc",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083945982757-oedtp358j08m55i8i8tinouugn4sgg5r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtCc_E96klXcT1O1cCoB2PmdOkd0u-0jI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083945982757-oedtp358j08m55i8i8tinouugn4sgg5r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083945982757:android:051ad8a21e6c99ca7458cc",
+        "android_client_info": {
+          "package_name": "com.logingoogle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083945982757-lb74k3q3da9k8cn3541erqtdbv9tp21p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.logingoogle",
+            "certificate_hash": "f7da73399e172e49a4963ec0a607bca9688a6208"
+          }
+        },
+        {
+          "client_id": "1083945982757-oedtp358j08m55i8i8tinouugn4sgg5r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtCc_E96klXcT1O1cCoB2PmdOkd0u-0jI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083945982757-oedtp358j08m55i8i8tinouugn4sgg5r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083945982757:android:7ea7b25b66d48b4f7458cc",
+        "android_client_info": {
+          "package_name": "com.quizmaster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083945982757-oedtp358j08m55i8i8tinouugn4sgg5r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtCc_E96klXcT1O1cCoB2PmdOkd0u-0jI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083945982757-oedtp358j08m55i8i8tinouugn4sgg5r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
