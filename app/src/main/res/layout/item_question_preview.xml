@@ -1,0 +1,52 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="question"
+            type="com.quizmaster.data.Question" />
+        <variable
+            name="position"
+            type="int" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:elevation="4dp"
+        android:padding="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/questionNumberTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text='@{"Question " + position + " (" + question.difficulty + " | " + question.category + ")"}'
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/questionTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text='@{question.question}'
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="4dp" />
+
+            <TextView
+                android:id="@+id/correctAnswerTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text='@{"Correct Answer: " + question.correctAnswer}'
+                android:textSize="13sp"
+                android:textColor="@android:color/holo_green_dark"
+                android:layout_marginTop="4dp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
