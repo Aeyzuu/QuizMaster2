@@ -1,35 +1,43 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".HomeStudentFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Available Quizzes"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"/>
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.quizmaster.viewModel.QuizViewModel" />
+        <variable
+            name="adapter"
+            type="com.quizmaster.adapter.AvailableQuizzesAdapter" />
+    </data>
 
-    <TextView
-        android:id="@+id/availableQuizzesTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Fetching Quizzes..."
-        android:gravity="center"
-        android:textSize="18sp"
-        android:paddingTop="32dp"
-        android:visibility="gone"
-        tools:visibility="visible"
-        android:layout_gravity="center_horizontal"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/availableQuizzesRecyclerView"
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_available_quiz"/>
+        tools:context=".Fragments.HomeStudentFragment">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/availableQuizzesTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No published quizzes yet."
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:visibility='@{viewModel.availableQuizzes != null &amp;&amp; viewModel.availableQuizzes.size() == 0 ? View.VISIBLE : View.GONE}' />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/availableQuizzesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility='@{viewModel.availableQuizzes != null &amp;&amp; viewModel.availableQuizzes.size() > 0 ? View.VISIBLE : View.GONE}'
+            app:adapter='@{adapter}'
+            app:items='@{viewModel.availableQuizzes}'
+            tools:listitem="@layout/item_available_quiz" />
+
+    </LinearLayout>
+</layout>

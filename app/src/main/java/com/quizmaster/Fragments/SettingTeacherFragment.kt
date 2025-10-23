@@ -1,4 +1,4 @@
-package com.quizmaster
+package com.quizmaster.Fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,12 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.quizmaster.databinding.FragmentSettingStudentBinding
+import com.quizmaster.databinding.FragmentSettingTeacherBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.quizmaster.Activity.SignInActivity
 
-class SettingStudentFragment : Fragment() {
+class SettingTeacherFragment : Fragment() {
 
-    private var _binding: FragmentSettingStudentBinding? = null
+    private var _binding: FragmentSettingTeacherBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -19,7 +20,7 @@ class SettingStudentFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSettingStudentBinding.inflate(inflater, container, false)
+        _binding = FragmentSettingTeacherBinding.inflate(inflater, container, false)
         return binding.root
     }
 
