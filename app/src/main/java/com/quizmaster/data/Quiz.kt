@@ -1,10 +1,12 @@
 package com.quizmaster.data
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Quiz(
-    val id: String = "",
-    val name: String = "",
-    val teacherId: String = "",
-    val questions: List<Question> = emptyList(),
-    val isPublished: Boolean = false,
-    val createdAt: Long = System.currentTimeMillis()
-)
+    var id: String = "",
+    val title: String = "",
+    val category: String = "",
+    val questions: List<Question> = emptyList()
+) : Parcelable

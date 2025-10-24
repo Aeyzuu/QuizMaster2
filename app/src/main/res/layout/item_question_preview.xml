@@ -24,7 +24,7 @@
                 android:id="@+id/questionNumberTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text='@{"Question " + position + " (" + question.difficulty + " | " + question.category + ")"}'
+                android:text='@{"Question " + (position + 1)}'
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:textColor="@android:color/black" />
@@ -42,7 +42,7 @@
                 android:id="@+id/correctAnswerTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text='@{"Correct Answer: " + question.correctAnswer}'
+                android:text='@{"Correct Answer: " + question.answer}'
                 android:textSize="13sp"
                 android:textColor="@android:color/holo_green_dark"
                 android:layout_marginTop="4dp" />

@@ -1,30 +1,14 @@
 package com.quizmaster.data
 
-import com.google.gson.annotations.SerializedName
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-/**
- * Data class for a single question.
- * Uses @SerializedName for API fetching (e.g., OpenTDB) and defaults for Firebase.
- */
+@Parcelize
 data class Question(
-    @SerializedName("category")
-    val category: String = "",
-
-    @SerializedName("type")
-    val type: String = "",
-
-    @SerializedName("difficulty")
-    val difficulty: String = "",
-
-    @SerializedName("question")
     val question: String = "",
-
-    @SerializedName("correct_answer")
-    val correctAnswer: String = "",
-
-    @SerializedName("incorrect_answers")
-    val incorrectAnswers: List<String> = emptyList(),
-
-    // Utility field for holding all answers (shuffled)
-    val allAnswers: List<String> = emptyList()
-)
+    val option1: String = "",
+    val option2: String = "",
+    val option3: String = "",
+    val option4: String = "",
+    val answer: String = ""
+) : Parcelable

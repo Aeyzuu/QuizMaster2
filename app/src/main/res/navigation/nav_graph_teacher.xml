@@ -8,14 +8,54 @@
         android:id="@+id/homeTeacherFragment"
         android:name="com.quizmaster.Fragments.HomeTeacherFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home_teacher" />
+        tools:layout="@layout/fragment_home_teacher">
+        <action
+            android:id="@+id/action_homeTeacherFragment_to_addCategoryFragment"
+            app:destination="@id/addCategoryFragment" />
+        <action
+            android:id="@+id/action_homeTeacherFragment_to_quizManagementFragment"
+            app:destination="@id/quizManagementFragment" />
+    </fragment>
 
+    <fragment
+        android:id="@+id/addCategoryFragment"
+        android:name="com.quizmaster.Fragments.AddCategoryFragment"
+        android:label="Add Category"
+        tools:layout="@layout/fragment_add_category" />
+
+    <fragment
+        android:id="@+id/quizManagementFragment"
+        android:name="com.quizmaster.Fragments.QuizManagementFragment"
+        android:label="Manage Quizzes"
+        tools:layout="@layout/fragment_quiz_management">
+        <action
+            android:id="@+id/action_quizManagementFragment_to_addQuizFragment"
+            app:destination="@id/addQuizFragment" />
+        <action
+            android:id="@+id/action_quizManagementFragment_to_editQuizFragment"
+            app:destination="@id/editQuizFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addQuizFragment"
+        android:name="com.quizmaster.Fragments.AddQuizFragment"
+        android:label="Add Quiz"
+        tools:layout="@layout/fragment_add_quiz" />
+
+    <fragment
+        android:id="@+id/editQuizFragment"
+        android:name="com.quizmaster.Fragments.EditQuizFragment"
+        android:label="Edit Quiz"
+        tools:layout="@layout/fragment_edit_quiz">
+        <argument
+            android:name="quiz"
+            app:argType="com.quizmaster.data.Quiz" />
+    </fragment>
 
     <fragment
         android:id="@+id/settingTeacherFragment"
         android:name="com.quizmaster.Fragments.SettingTeacherFragment"
         android:label="Settings"
         tools:layout="@layout/fragment_setting_teacher" />
-
 
 </navigation>

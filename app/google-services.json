@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1083945982757:android:627b200ce40ad10d7458cc",
         "android_client_info": {
-          "package_name": "com.example.myapplication"
+          "package_name": "com.quizmaster"
         }
       },
       "oauth_client": [

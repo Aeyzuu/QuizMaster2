@@ -28,15 +28,15 @@
             android:textSize="16sp"
             android:gravity="center"
             android:layout_marginTop="16dp"
-            android:visibility='@{viewModel.availableQuizzes != null &amp;&amp; viewModel.availableQuizzes.size() == 0 ? View.VISIBLE : View.GONE}' />
+            android:visibility="@{viewModel.quizzes == null || viewModel.quizzes.empty ? View.VISIBLE : View.GONE}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/availableQuizzesRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility='@{viewModel.availableQuizzes != null &amp;&amp; viewModel.availableQuizzes.size() > 0 ? View.VISIBLE : View.GONE}'
-            app:adapter='@{adapter}'
-            app:items='@{viewModel.availableQuizzes}'
+            android:visibility="@{viewModel.quizzes != null &amp;&amp; !viewModel.quizzes.empty ? View.VISIBLE : View.GONE}"
+            app:adapter="@{adapter}"
+            app:items="@{viewModel.quizzes}"
             tools:listitem="@layout/item_available_quiz" />
 
     </LinearLayout>

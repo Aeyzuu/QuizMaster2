@@ -19,7 +19,8 @@ class DashboardTeacherActivity: AppCompatActivity() {
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_teacher) as NavHostFragment
-        binding.bottomNavigationTeacher.setupWithNavController(navHostFragment.navController)
+        val navController = navHostFragment.navController
+        binding.bottomNavigationTeacher.setupWithNavController(navController)
 
     }
 }

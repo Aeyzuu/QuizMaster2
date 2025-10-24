@@ -7,9 +7,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.auth.FirebaseAuth
 import com.quizmaster.R
 import com.quizmaster.adapter.QuestionPreviewAdapter
+import com.quizmaster.data.Quiz
 import com.quizmaster.data.QuizRepository
 import com.quizmaster.databinding.FragmentHomeTeacherBinding
 import com.quizmaster.viewModel.QuizViewModel
@@ -17,7 +17,7 @@ import com.quizmaster.viewModel.QuizViewModel
 class HomeTeacherFragment : Fragment() {
 
     private val quizViewModel: QuizViewModel by viewModels {
-        QuizViewModel.Factory(QuizRepository())
+        QuizViewModel.QuizViewModelFactory(QuizRepository())
     }
 
     private lateinit var binding: FragmentHomeTeacherBinding
@@ -49,22 +49,27 @@ class HomeTeacherFragment : Fragment() {
         }
 
         binding.fetchQuestionsButton.setOnClickListener {
+            // Using hardcoded values for demonstration
+            // In a real app, you'd get these from UI inputs
             quizViewModel.fetchTriviaQuestions(10, 22, "medium")
         }
 
         binding.saveQuizButton.setOnClickListener {
             val quizTitle = binding.quizTitleInput.text.toString().trim()
-            val teacherId = FirebaseAuth.getInstance().currentUser?.uid
             val questions = quizViewModel.fetchedQuestions.value
+            val category = quizViewModel.fetchedCategory.value
 
-            if (quizTitle.isEmpty() || questions.isNullOrEmpty() || teacherId.isNullOrEmpty()) {
-                Toast.makeText(context, "Fill title, fetch questions, ensure logged in", Toast.LENGTH_LONG).show()
+            if (quizTitle.isEmpty() || questions.isNullOrEmpty() || category.isNullOrEmpty()) {
+                Toast.makeText(context, "Please enter a title and fetch questions first", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
-            quizViewModel.saveQuiz(quizTitle, teacherId, questions)
+            val quiz = Quiz(title = quizTitle, questions = questions, category = category)
+            quizViewModel.saveQuiz(quiz)
+
+            // Clear fields after saving
             binding.quizTitleInput.setText("")
-            quizViewModel.clearQuestions()
+            quizViewModel.clearFetchedData()
         }
     }
 }

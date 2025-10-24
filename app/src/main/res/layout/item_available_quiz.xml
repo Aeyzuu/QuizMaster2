@@ -24,25 +24,16 @@
                 android:id="@+id/quizTitleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{quiz.name}"
+                android:text="@{quiz.title}"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:textColor="@android:color/black" />
 
             <TextView
-                android:id="@+id/quizTeacherTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text='@{"Teacher ID: " + quiz.teacherId}'
-                android:textSize="14sp"
-                android:textColor="@android:color/darker_gray"
-                android:layout_marginTop="4dp" />
-
-            <TextView
                 android:id="@+id/quizQuestionCountTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text='@{"Questions: " + String.valueOf(quiz.questions.size())}'
+                android:text='@{"Questions: " + (quiz.questions != null ? quiz.questions.size : 0)}'
                 android:textSize="14sp"
                 android:textColor="@android:color/darker_gray"
                 android:layout_marginTop="2dp" />

@@ -2,7 +2,7 @@ package com.quizmaster.Activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.NavHostFragment // Correctly imported
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.quizmaster.R
 import com.quizmaster.databinding.ActivityDashboardStudentBinding
@@ -17,11 +17,14 @@ class DashboardStudentActivity: AppCompatActivity() {
         binding = ActivityDashboardStudentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // The NavHostFragment casting will now work because the XML name attribute is corrected.
+        // Find the NavHostFragment from the layout
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.student_nav_host_fragment) as NavHostFragment
 
-        binding.bottomNavigationStudent.setupWithNavController(navHostFragment.navController)
+        // Get the NavController from the NavHostFragment
+        val navController = navHostFragment.navController
 
+        // Set up the BottomNavigationView with the NavController
+        binding.bottomNavigationStudent.setupWithNavController(navController)
     }
 }

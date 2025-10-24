@@ -18,7 +18,7 @@ class HomeStudentFragment : Fragment() {
 
     // ViewModel with injected Repository
     private val quizViewModel: QuizViewModel by viewModels {
-        QuizViewModel.Factory(QuizRepository())
+        QuizViewModel.QuizViewModelFactory(QuizRepository())
     }
 
     // DataBinding reference
@@ -55,7 +55,7 @@ class HomeStudentFragment : Fragment() {
         binding.availableQuizzesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // Optional: Manual observation (if you haven’t set up BindingAdapter for items)
-        quizViewModel.availableQuizzes.observe(viewLifecycleOwner) { quizzes ->
+        quizViewModel.quizzes.observe(viewLifecycleOwner) { quizzes ->
             quizAdapter.submitList(quizzes)
         }
     }

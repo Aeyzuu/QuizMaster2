@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -8,49 +9,63 @@
             type="com.quizmaster.viewModel.QuizViewModel" />
     </data>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:padding="16dp"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/quizTitleInput"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter quiz title"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="8dp" />
+            android:padding="16dp"
+            tools:context=".Fragments.HomeTeacherFragment">
 
-        <Button
-            android:id="@+id/fetchQuestionsButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Fetch Questions" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/quiz_title_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <Button
-            android:id="@+id/saveQuizButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Save Quiz"
-            android:layout_marginTop="8dp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/quiz_title_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Quiz Title" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/noQuestionsText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="No questions fetched yet."
-            android:gravity="center"
-            android:layout_marginTop="16dp"
-            android:visibility="@{viewModel.fetchedQuestions.size() == 0 ? View.VISIBLE : View.GONE}" />
+            <Button
+                android:id="@+id/fetch_questions_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Fetch Questions"
+                app:layout_constraintTop_toBottomOf="@id/quiz_title_layout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/questionsRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:visibility="@{viewModel.fetchedQuestions.size() > 0 ? View.VISIBLE : View.GONE}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/questions_recycler_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/fetch_questions_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:listitem="@layout/item_question_preview"
+                tools:itemCount="5" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/save_quiz_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Save Quiz"
+                app:layout_constraintTop_toBottomOf="@id/questions_recycler_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

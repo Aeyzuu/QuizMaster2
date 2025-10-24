@@ -1,6 +1,5 @@
 package com.quizmaster.retrofit
 
-import com.quizmaster.Models.QuestionStats
 import com.quizmaster.Models.QuizResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -14,9 +13,4 @@ interface QuizService {
         @Query("difficulty")difficulty:String?,
         @Query("type") type:String?
     ):Call<QuizResponse>
-}
-
-interface QuestionStatsService{
-    @GET("api_count_global.php")
-    fun getData():Call<QuestionStats>
 }

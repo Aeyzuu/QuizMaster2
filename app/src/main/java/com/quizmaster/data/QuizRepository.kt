@@ -2,63 +2,71 @@ package com.quizmaster.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.tasks.await
+import java.net.URLDecoder
 
 class QuizRepository {
 
     private val quizzesRef = FirebaseDatabase.getInstance().reference.child("Quizzes")
+    private val triviaService = RetrofitInstance.api
 
-    // LiveData for questions fetched (teacher)
-    val fetchedQuestions = MutableLiveData<List<Question>>()
-
-    // LiveData for published quizzes (student)
     private val _availableQuizzes = MutableLiveData<List<Quiz>>()
     val availableQuizzes: LiveData<List<Quiz>> = _availableQuizzes
-
-    private val _statusMessage = MutableLiveData<String>()
-    val statusMessage: LiveData<String> get() = _statusMessage
 
     init {
         setupQuizListener()
     }
 
-    fun getPublishedQuizzes(): LiveData<List<Quiz>> = availableQuizzes
+    suspend fun getTriviaQuestions(amount: Int, categoryId: Int, difficulty: String): Pair<String, List<Question>> {
+        val response = triviaService.getQuestions(amount, categoryId, difficulty)
+        if (response.isSuccessful && response.body() != null) {
+            val triviaQuestions = response.body()!!.results
+            if (triviaQuestions.isNotEmpty()) {
+                val categoryName = URLDecoder.decode(triviaQuestions.first().category, "UTF-8")
+                val questions = triviaQuestions.map { triviaQuestion ->
+                    val decodedQuestion = URLDecoder.decode(triviaQuestion.question, "UTF-8")
+                    val correctAnswer = URLDecoder.decode(triviaQuestion.correct_answer, "UTF-8")
+                    val incorrectAnswers = triviaQuestion.incorrect_answers.map { URLDecoder.decode(it, "UTF-8") }
 
-    fun fetchQuestions(amount: Int, categoryId: Int, difficulty: String) {
-        val mockQuestions = listOf(
-            Question(
-                category = "Geography",
-                difficulty = difficulty,
-                type = "multiple",
-                question = "What is the capital of France?",
-                correctAnswer = "Paris",
-                incorrectAnswers = listOf("London", "Berlin", "Rome"),
-                allAnswers = listOf("Paris", "London", "Berlin", "Rome").shuffled()
-            ),
-            Question(
-                category = "Geography",
-                difficulty = difficulty,
-                type = "multiple",
-                question = "Which country contains the Great Barrier Reef?",
-                correctAnswer = "Australia",
-                incorrectAnswers = listOf("Mexico", "Brazil", "Indonesia"),
-                allAnswers = listOf("Australia", "Mexico", "Brazil", "Indonesia").shuffled()
-            )
-        )
-        fetchedQuestions.postValue(mockQuestions)
+                    val allAnswers = (incorrectAnswers + correctAnswer).shuffled()
+                    Question(
+                        question = decodedQuestion,
+                        option1 = allAnswers.getOrElse(0) { "" },
+                        option2 = allAnswers.getOrElse(1) { "" },
+                        option3 = allAnswers.getOrElse(2) { "" },
+                        option4 = allAnswers.getOrElse(3) { "" },
+                        answer = correctAnswer
+                    )
+                }
+                return Pair(categoryName, questions)
+            }
+        }
+        throw Exception("API Call failed or returned no questions. Code: ${response.code()}")
     }
 
-    fun saveQuiz(title: String, teacherId: String, questions: List<Question>) {
-        val newQuizId = quizzesRef.push().key ?: return
-        val newQuiz = Quiz(
-            id = newQuizId,
-            name = title,
-            teacherId = teacherId,
-            questions = questions,
-            isPublished = true
-        )
-        quizzesRef.child(newQuizId).setValue(newQuiz)
-        _statusMessage.postValue("Quiz \"$title\" published successfully!")
+    suspend fun saveQuiz(quiz: Quiz): Boolean {
+        val newQuizId = quiz.id.ifBlank { quizzesRef.push().key ?: return false }
+        val quizToSave = quiz.copy(id = newQuizId)
+
+        return try {
+            quizzesRef.child(newQuizId).setValue(quizToSave).await()
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    suspend fun updateQuiz(quiz: Quiz): Boolean {
+        return try {
+            quizzesRef.child(quiz.id).setValue(quiz).await()
+            true
+        } catch (e: Exception) {
+            false
+        }
     }
 
     private fun setupQuizListener() {
@@ -67,14 +75,13 @@ class QuizRepository {
                 val quizList = mutableListOf<Quiz>()
                 for (quizSnapshot in snapshot.children) {
                     val quiz = quizSnapshot.getValue(Quiz::class.java)
-                    if (quiz != null && quiz.isPublished) quizList.add(quiz)
+                    if (quiz != null) quizList.add(quiz)
                 }
                 _availableQuizzes.postValue(quizList)
             }
 
             override fun onCancelled(error: DatabaseError) {
                 _availableQuizzes.postValue(emptyList())
-                _statusMessage.postValue("Error fetching quizzes: ${error.message}")
             }
         })
     }
